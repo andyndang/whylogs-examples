@@ -1,0 +1,1068 @@
+{
+  "type": "record",
+  "namespace": "com.whylabs",
+  "name": "value_lending_club",
+  "doc": "",
+  "fields": [
+    {
+      "name": "id",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "member_id",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "loan_amnt",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "funded_amnt",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "funded_amnt_inv",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "term",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "int_rate",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "installment",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "grade",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "sub_grade",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "emp_title",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "emp_length",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "home_ownership",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "annual_inc",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "verification_status",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "issue_d",
+      "type": [
+        "null",
+        {
+          "type": "long",
+          "logicalType": "timestamp-micros"
+        }
+      ]
+    },
+    {
+      "name": "loan_status",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "pymnt_plan",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "url",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "desc",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "purpose",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "title",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "zip_code",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "addr_state",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "dti",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "delinq_2yrs",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "earliest_cr_line",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "fico_range_low",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "fico_range_high",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "inq_last_6mths",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mths_since_last_delinq",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mths_since_last_record",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "open_acc",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "pub_rec",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "revol_bal",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "revol_util",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_acc",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "initial_list_status",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "out_prncp",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "out_prncp_inv",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_pymnt",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_pymnt_inv",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_rec_prncp",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_rec_int",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_rec_late_fee",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "recoveries",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "collection_recovery_fee",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "last_pymnt_d",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "last_pymnt_amnt",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "next_pymnt_d",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "last_credit_pull_d",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "last_fico_range_high",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "last_fico_range_low",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "collections_12_mths_ex_med",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mths_since_last_major_derog",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "policy_code",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "application_type",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "annual_inc_joint",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "dti_joint",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "verification_status_joint",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "acc_now_delinq",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "tot_coll_amt",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "tot_cur_bal",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "open_acc_6m",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "open_act_il",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "open_il_12m",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "open_il_24m",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mths_since_rcnt_il",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_bal_il",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "il_util",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "open_rv_12m",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "open_rv_24m",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "max_bal_bc",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "all_util",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_rev_hi_lim",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "inq_fi",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_cu_tl",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "inq_last_12m",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "acc_open_past_24mths",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "avg_cur_bal",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "bc_open_to_buy",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "bc_util",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "chargeoff_within_12_mths",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "delinq_amnt",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mo_sin_old_il_acct",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mo_sin_old_rev_tl_op",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mo_sin_rcnt_rev_tl_op",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mo_sin_rcnt_tl",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mort_acc",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mths_since_recent_bc",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mths_since_recent_bc_dlq",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mths_since_recent_inq",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "mths_since_recent_revol_delinq",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_accts_ever_120_pd",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_actv_bc_tl",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_actv_rev_tl",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_bc_sats",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_bc_tl",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_il_tl",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_op_rev_tl",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_rev_accts",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_rev_tl_bal_gt_0",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_sats",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_tl_120dpd_2m",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_tl_30dpd",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_tl_90g_dpd_24m",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "num_tl_op_past_12m",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "pct_tl_nvr_dlq",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "percent_bc_gt_75",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "pub_rec_bankruptcies",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "tax_liens",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "tot_hi_cred_lim",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_bal_ex_mort",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_bc_limit",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "total_il_high_credit_limit",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "revol_bal_joint",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_fico_range_low",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_fico_range_high",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_earliest_cr_line",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_inq_last_6mths",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_mort_acc",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_open_acc",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_revol_util",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_open_act_il",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_num_rev_accts",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_chargeoff_within_12_mths",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_collections_12_mths_ex_med",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "sec_app_mths_since_last_major_derog",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "hardship_flag",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "hardship_type",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "hardship_reason",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "hardship_status",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "deferral_term",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "hardship_amount",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "hardship_start_date",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "hardship_end_date",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "payment_plan_start_date",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "hardship_length",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "hardship_dpd",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "hardship_loan_status",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "orig_projected_additional_accrued_interest",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "hardship_payoff_balance_amount",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "hardship_last_payment_amount",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "disbursement_method",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "debt_settlement_flag",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "debt_settlement_flag_date",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "settlement_status",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "settlement_date",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "settlement_amount",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "settlement_percentage",
+      "type": [
+        "null",
+        "double"
+      ]
+    },
+    {
+      "name": "settlement_term",
+      "type": [
+        "null",
+        "double"
+      ]
+    }
+  ]
+}

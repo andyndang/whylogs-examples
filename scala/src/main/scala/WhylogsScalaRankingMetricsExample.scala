@@ -1,6 +1,6 @@
 // Tested on Databricks cluster running as scala notebook:
 // * cluster version: 13.3 (includes Apache Spark 3.4.1, Scala 2.12)
-// * installed whylogs jar: https://oss.sonatype.org/service/local/repositories/snapshots/content/ai/whylabs/whylogs-spark-bundle_3.1.1-scala_2.12/0.2.0-b4-SNAPSHOT/whylogs-spark-bundle_3.1.1-scala_2.12-0.2.0-b4-20240502.212838-1-all.jar
+// * installed whylogs jar: https://oss.sonatype.org/service/local/repositories/snapshots/content/ai/whylabs/whylogs-spark-bundle_3.1.1-scala_2.12/0.2.0-b4-SNAPSHOT/whylogs-spark-bundle_3.1.1-scala_2.12-0.2.0-b4-20240507.023439-3-all.jar
 /* Maven module
 <dependency>
   <groupId>ai.whylabs</groupId>
@@ -64,13 +64,29 @@ val predictionAndLabelsAndeScoresWithGroupsRDD = spark.sparkContext.parallelize(
         ("g3", Array(1, 6, 2, 7, 8, 3, 9, 10, 4, 5), Array(1, 2, 3, 4, 5))),
       6)
 
+val predictionAndLabelsRDD = spark.sparkContext.parallelize(
+      Seq(
+        (Array(1,2,3,4,5,6,7,8,9,10), Array(true, false, true, false, false, true, false, false, true, true)),
+        (Array(1,2,3,4,5,6,7,8,9,10), Array(false, true, false, false, true, false, true, false, false, false)),
+        (Array(1, 2, 3, 4, 5), Array(false, false, false, false, false))),
+      2)
+val df_binary = predictionAndLabelsRDD.toDF("predictions", "labels").withColumn(timeColumn, lit(t1).cast(DataTypes.TimestampType))
 // Now we have an example DataFrame with columns for the predictions and targets
 // We'll copy it a few times for different timestamps and then combine them into a single df to mimic backfill data
 val df1 = predictionAndLabelsAndeScoresWithGroupsRDD.toDF("groups", "predictions", "labels").withColumn(timeColumn, lit(t1).cast(DataTypes.TimestampType))
 val df2 = predictionAndLabelsAndeScoresWithGroupsRDD.toDF("groups", "predictions", "labels").withColumn(timeColumn, lit(t2).cast(DataTypes.TimestampType))
 val df3 = predictionAndLabelsAndeScoresWithGroupsRDD.toDF("groups", "predictions", "labels").withColumn(timeColumn, lit(t3).cast(DataTypes.TimestampType))
 val df = df1.union(df2).union(df3)
-df.printSchema()
+print(df.printSchema())
+
+val session_binary = df_binary.newProfilingSession("RankingMetricsTest") // start a new WhyLogs profiling job
+  .withTimeColumn(timeColumn) // profiles generated for each unique time
+  .withRankingMetrics(predictionField="predictions", targetField="labels", k=2)
+
+session_binary.logRankingMetricsBinary(
+          orgId = "replace-with-org-id",
+          modelId = "replace-with-model-id",
+          apiKey = "replace-with-api-key")
 
 // Next we create a profiling session to compute RankingMetrics
 // This must be a stand alone profiling session that does not compute

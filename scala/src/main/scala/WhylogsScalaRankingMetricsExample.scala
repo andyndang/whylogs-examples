@@ -51,6 +51,7 @@ val spark = SparkSession
 
 // Adapting examples from the Apache support for RankingMetrics: 
 // See https://spark.apache.org/docs/2.3.0/mllib-evaluation-metrics.html#ranking-systems
+// But also add a "groups" column with values g1, g2, g3 to show how you can run profiling with segments
 val predictionAndLabelsAndeScoresWithGroupsRDD = spark.sparkContext.parallelize(
       Seq(
         ("g1", Array(1, 6, 2, 7, 8, 3, 9, 10, 4, 5), Array(1, 2, 3, 4, 5)),
@@ -64,33 +65,58 @@ val predictionAndLabelsAndeScoresWithGroupsRDD = spark.sparkContext.parallelize(
         ("g3", Array(1, 6, 2, 7, 8, 3, 9, 10, 4, 5), Array(1, 2, 3, 4, 5))),
       6)
 
+// Here is a Binary Ranking metrics example, where the values in the predictions array are the ranks, and the
+// order of the values does not matter, but the length should match the Boolean array as Boolean values indicate
+// whether or not the corresponding rank at the same index was considered relevant. This might be useful when you
+// want to use some user signal like "clicks" as the source of this binary relevance.
 val predictionAndLabelsRDD = spark.sparkContext.parallelize(
       Seq(
         (Array(1,2,3,4,5,6,7,8,9,10), Array(true, false, true, false, false, true, false, false, true, true)),
         (Array(1,2,3,4,5,6,7,8,9,10), Array(false, true, false, false, true, false, true, false, false, false)),
         (Array(1, 2, 3, 4, 5), Array(false, false, false, false, false))),
       2)
+
+// the built in Scala RankingMetrics operate on RDDs, which is why we start with an RDD here to mirror the those example data
+// But the whylogs profiling operates on DataFrames, so here we transform the RDD to a DataFrame and name the columns, and also 
+// add a timeColumn based on the timestamps generated above: t1, t2, t3
 val df_binary = predictionAndLabelsRDD.toDF("predictions", "labels").withColumn(timeColumn, lit(t1).cast(DataTypes.TimestampType))
+
 // Now we have an example DataFrame with columns for the predictions and targets
 // We'll copy it a few times for different timestamps and then combine them into a single df to mimic backfill data
+// Also we're using the more complex test data that contains a "groups" column we will use to segment the profile so we can drill
+// down into the ranking metrics for a specific group, such as g1. We also get the rollup of all groups when profiling this way,
+// but care should be taken to keep the number of groups relatively small as each segment generates a separate profile so runtime
+// latency of profiling and size will scale linearly with the cardinality of this groups column.
 val df1 = predictionAndLabelsAndeScoresWithGroupsRDD.toDF("groups", "predictions", "labels").withColumn(timeColumn, lit(t1).cast(DataTypes.TimestampType))
 val df2 = predictionAndLabelsAndeScoresWithGroupsRDD.toDF("groups", "predictions", "labels").withColumn(timeColumn, lit(t2).cast(DataTypes.TimestampType))
 val df3 = predictionAndLabelsAndeScoresWithGroupsRDD.toDF("groups", "predictions", "labels").withColumn(timeColumn, lit(t3).cast(DataTypes.TimestampType))
+
+// Now we have a combined DataFrame, df, with three days of data and also a group column
 val df = df1.union(df2).union(df3)
 print(df.printSchema())
 
+// Here is the new method in 0.2.0-b4 .withRaningMetrics which takes in the names of the columns containing your
+// predictions, targets, (optionally scores) fields, and optionally a value for k 
+// (The default value of k is 10 aligning with the Apache SPark mllib's RankingMetrics)
 val session_binary = df_binary.newProfilingSession("RankingMetricsTest") // start a new WhyLogs profiling job
   .withTimeColumn(timeColumn) // profiles generated for each unique time
   .withRankingMetrics(predictionField="predictions", targetField="labels", k=2)
 
+// You can trigger the logging and upload to WhyLabs with logRankingMetrics or LogRankingMetricsBinary.
+// Here we use the logRankingMetricsBinary which ensures that if your targetField contains Array[Int] values
+// That these are actually binary relevance scores of 0 or 1, further the predictionsField is interpreted as
+// containing the rank positions. If your targetField is Array[Boolean] either method
+// behaves the same way interpreting the targets as binary values.
 session_binary.logRankingMetricsBinary(
           orgId = "replace-with-org-id",
           modelId = "replace-with-model-id",
           apiKey = "replace-with-api-key")
 
-// Next we create a profiling session to compute RankingMetrics
-// This must be a stand alone profiling session that does not compute
-// other whylogs metrics. The default of k is 10 if not specified
+// Next we create a profiling session to compute RankingMetrics on our grouped (non-Binary) example data.
+// The default of k is 10 if not specified. In the non-Binary scenario, the predictions and targets are treated
+// as document Ids, and not as rank positions. The rank position is inferred by the index of the prediction.
+// In the test data we have 3 dates in our timeColumn, so we need to tell the whylogs session to use this column
+// as the dataset's timestamp. Also we specify that we want a segmented profile using the "groups" column.
 val session = df.newProfilingSession("RankingMetricsTest") // start a new WhyLogs profiling job
   .withTimeColumn(timeColumn) // profiles generated for each unique time
   .withRankingMetrics(predictionField="predictions", targetField="labels", k=2)
@@ -103,6 +129,9 @@ val session = df.newProfilingSession("RankingMetricsTest") // start a new WhyLog
 // also the settings page allows you t create new apiKeys which you will need an apiKey to upload to your account in Whylabs
 // The modelId below specifies which model this profile is for, by default an initial model-1 is created but you will update this
 // if you create a new model here https://hub.whylabsapp.com/settings/model-management
+//
+// The logRankingMetrics will upload the profile along with the RankingMetrics computed above across the groups
+// and times speficied in the timeColumn.
 session.logRankingMetrics(
           orgId = "replace-with-org-id",
           modelId = "replace-with-model-id",
